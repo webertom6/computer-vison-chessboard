@@ -74,7 +74,7 @@ def double_detect_yolo(frame):
             cx_original, cy_original = cx_resized / fx, cy_resized / fy
             
             distance = cv2.pointPolygonTest(hull, (cx_original, cy_original), True)
-            if distance < -10:
+            if distance < -DISTANCE_HULL:
                 continue  # Skip this prediction if the center is not inside the hull or within 10 pixels
 
             bbox_data.append((cx_original, cy_original, x1_original, y1_original, x2_original, y2_original))  # Store center and box dimensions
@@ -83,6 +83,31 @@ def double_detect_yolo(frame):
             # cv2.circle(frame, (int(cx_original), int(cy_original)), 3, BLUE, -1)
             cv2.rectangle(frame, (int(x1_original), int(y1_original)), (int(x2_original), int(y2_original)), ORANGE, 2)
             # cv2.putText(frame, label_text, (int(x1_original), int(y1_original) - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, BLACK, 2)
+
+    for result in results:
+        for box in result.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].tolist()
+            confidence = box.conf[0].item()
+            # check box is already tracked if not, no id
+            if box.id is not None:
+                label = int(box.id.item())
+            else:
+                label = 99
+            label_text = f"{confidence:.2f}"
+
+            cx, cy = (x1 + x2) / 2, (y1 + y2) / 2  # Center of the bounding box
+
+            # Check if the center of the bounding box is inside the hull or within 10 pixels
+            distance = cv2.pointPolygonTest(hull, (cx, cy), True)
+            if distance < -DISTANCE_HULL:
+                continue 
+                
+            bbox_data.append((cx, cy, x1, y1, x2, y2))
+
+            # Visualize the results on the original frame
+            cv2.circle(frame, (int(cx), int(cy)), 3, BLUE, -1)
+            cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), ORANGE, 2)
+            cv2.putText(frame, label_text, (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, BLACK, 2)         
 
     return bbox_data, frame
 
