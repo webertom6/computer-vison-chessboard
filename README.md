@@ -1,4 +1,4 @@
-# Identification Chessboard AComputer Vision
+# Identification Chessboard Computer Vision
 
 A solution capable of retrieving the name of each chess piece on a board at a given position and replacing it in augmented reality.
 
