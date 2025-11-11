@@ -23,7 +23,6 @@ upper_white = [min(240, c + range_white) for c in WHITE_CHESS]
 """
 Custom YOLO train over Roboflow dataset on corner of chessboard
 """
-# model = YOLO(r'C:\Users\Student11\Documents\git\ELEN-CV\project\yolo\yolo11n_custom6h.pt')
 model = YOLO(r'weights\best.pt')
 model2 = YOLO(r'weights\best11m.pt')
 

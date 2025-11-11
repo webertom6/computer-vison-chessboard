@@ -51,4 +51,4 @@ identify and locate blue and pink sticker on the edge of chessboard
 ## chessboard segmentation
 
 ### `seg_board.ipynb`
-> segment using Probabilistic Hough Lines, identify vertical and horizontal lines, define an x-y axis, cluster close lines, get intersection points and define a 8x8 grid
+> segment using Probabilistic Hough Lines, identify vertical and horizontal lines, cluster close lines, get intersection points and define a 8x8 grid

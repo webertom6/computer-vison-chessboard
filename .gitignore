@@ -1,11 +1,16 @@
 /task2/*
 /task3/*
 /test/*
-/video/*
 /yolo/*
 
 *.png
 *.jpg
+*.avi
+*.mp4
+*.mov
+
+*.npy
+*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
