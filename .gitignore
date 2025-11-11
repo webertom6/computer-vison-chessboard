@@ -1,9 +1,10 @@
+/img_test/*
 /task2/*
 /task3/*
 /test/*
 /yolo/*
 
-*.png
+# *.png
 *.jpg
 *.avi
 *.mp4
